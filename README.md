@@ -1,2 +1,2 @@
-# workinprogress-standard-deviation-calculator
-calculates the first mean fine, running into data type issues when calculating the second mean after everything is squared
+Standard deviation calculator
+currently only works with a sample, population to come sometime when im bored and work on this again
