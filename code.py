@@ -3,7 +3,7 @@ from math import sqrt
 class v:
     data = []
 
-def sample():
+def maths(size): #size refers to if its a sample or population, kinda stupid fucking variable name but im too lazy to give an actual fuck
     mean = 0
     total = 0
     for num in v.data:
@@ -13,9 +13,11 @@ def sample():
         v.data[x-1] -= mean
         v.data[x-1] = pow(v.data[x-1], 2)
         total += v.data[x-1]
-    total /= (len(v.data)-1)
-    print("standard deviation = " + str(sqrt(total)))
-    exit()
+    if size == 0:
+        total /= (len(v.data)-1)
+    else:
+        total /= len(v.data)
+    return ("standard deviation = " + str(sqrt(total)))
     
 def setup():
     inp = input("input a value ")
@@ -32,12 +34,11 @@ def setup():
     while True:
         inp = input("is this a population or a sample? ").lower()
         if inp == "sample":
-            sample()
-            break
+            print(maths(0))
+            exit()
         elif inp == "population":
-            print("still working on that")
-            break
+            print(maths(1))
+            exit()
         else:
             print("invalid response")
-            
 setup()
