@@ -1,57 +1,43 @@
-list1 = []
+from math import sqrt
 
-listinput = '1'
-listlen = 0
-listpos = 0
-v1 = 0
+class v:
+    data = []
 
-while listinput != 'end':
-    listinput = input('input a number into the list of data ')
-    if listinput == 'end':
-        print('done')
-    else:  
-        list1.append(listinput)
-        listlen += 1
-
-for listn in list1:
-    try:
-        listn = list(map(int, list1))
-    except:
-        listn = list(map(float, list1))
-
-print('\nthe data:') 
-for lis1 in list1:
-    print(lis1)
-
-print('\nthe list length =',listlen)
-
-while listpos < listlen:
-    v1 += listn[listpos]
-    listpos += 1
-
-v1 /= listlen
-print('\nthe mean =',v1)
-
-print('testlistnotright',listn)
-print(type(listn[0]))
-
-listpos = 0
-
-for listn in list1:
-    print(type(listn[0]))
-    try:
-        listn[listpos] = int(listn[listpos])
-        print(type(listn[0]))
-    except:
-        listn[listpos] = float(listn[listpos])
-        print(type(listn[0]))
-    listn[listpos] = pow(listn[listpos], 2)
-    lispos += 1
-
-listpos = 0
-
-while listpos < listlen:
-    v2 += listn[listpos]
-    listpos += 1
-
-print('v2',v2)
+def sample():
+    mean = 0
+    total = 0
+    for num in v.data:
+        mean += int(num)
+    mean /= len(v.data)
+    for x in range(len(v.data)):
+        v.data[x-1] -= mean
+        v.data[x-1] = pow(v.data[x-1], 2)
+        total += v.data[x-1]
+    total /= (len(v.data)-1)
+    print("standard deviation = " + str(sqrt(total)))
+    exit()
+    
+def setup():
+    inp = input("input a value ")
+    if inp != "end":
+        try:
+            v.data.append(int(inp))
+        except:
+            print("invalid response")
+            setup()
+        else:
+            setup()
+    else:
+        print("data process ended")
+    while True:
+        inp = input("is this a population or a sample? ").lower()
+        if inp == "sample":
+            sample()
+            break
+        elif inp == "population":
+            print("still working on that")
+            break
+        else:
+            print("invalid response")
+            
+setup()
