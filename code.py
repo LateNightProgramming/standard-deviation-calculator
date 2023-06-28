@@ -1,44 +1,43 @@
 from math import sqrt
 
-class v:
-    data = []
+data = []
 
-def maths(size): #size refers to if its a sample or population, kinda stupid fucking variable name but im too lazy to give an actual fuck
+def maths(size,data):
     mean = 0
     total = 0
-    for num in v.data:
+    for num in data:
         mean += int(num)
-    mean /= len(v.data)
-    for x in range(len(v.data)):
-        v.data[x-1] -= mean
-        v.data[x-1] = pow(v.data[x-1], 2)
-        total += v.data[x-1]
+    mean /= len(data)
+    for x in range(len(data)):
+        data[x-1] -= mean
+        data[x-1] = pow(data[x-1], 2)
+        total += data[x-1]
     if size == 0:
-        total /= (len(v.data)-1)
+        total /= (len(data)-1)
     else:
-        total /= len(v.data)
-    return ("standard deviation = " + str(sqrt(total)))
+        total /= len(data)
+    return ("standard deviation = " + str(round(sqrt(total),4)))
     
-def setup():
+def setup(data):
     inp = input("input a value ")
     if inp != "end":
         try:
-            v.data.append(int(inp))
+            data.append(int(inp))
         except:
             print("invalid response")
-            setup()
+            setup(data)
         else:
-            setup()
+            setup(data)
     else:
         print("data process ended")
     while True:
         inp = input("is this a population or a sample? ").lower()
         if inp == "sample":
-            print(maths(0))
+            print(maths(0,data))
             exit()
         elif inp == "population":
-            print(maths(1))
+            print(maths(1,data))
             exit()
         else:
             print("invalid response")
-setup()
+setup(data)
